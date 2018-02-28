@@ -1,0 +1,55 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        String ret="";
+        int length=s.length();//0
+        int trav=0;
+        if(numRows==1 || numRows>=length){
+            return s;
+        }
+        for(int i=0,j=(numRows-1);i<numRows;i++,j--){
+            trav=0;
+            boolean b=true;
+            boolean first=true;
+            while(true){
+                if(first){
+                    trav=trav+i;
+                    first=false;
+                }
+                else if(i<=j && b==true && i>=0){
+                    trav=trav+(Math.max(i,j)*2);
+                    b=false;
+                }
+                else if(i<=j && b==false){
+                    if(i!=0){
+                        trav=trav+(Math.min(i,j)*2);
+                        b=true;
+                    }
+                    else{
+                        trav=trav+(Math.max(i,j)*2);
+                        b=true;
+                    }
+                }else if(j<=i && b==true){
+                    if(j!=0){
+                        trav=trav+(Math.min(i,j)*2);
+                        b=false;
+                    }
+                    else{
+                        trav=trav+(Math.max(i,j)*2);
+                        b=false;   
+                    }    
+                }
+                else if(j<=i && b==false && j>=0){
+                    trav=trav+(Math.max(i,j)*2);
+                    b=true;
+                }
+                if(trav<s.length()){
+                    ret=ret+s.charAt(trav);
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+}
