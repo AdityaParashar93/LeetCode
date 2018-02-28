@@ -1,0 +1,62 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head=new ListNode(0);
+        int carry=0;
+        boolean b=true;
+        ListNode trav=null;
+        while(l1!=null || l2!=null){
+            if(b){
+                if(l1!=null && l2!=null){
+                    head.val=(l1.val+l2.val+carry)%10;
+                    carry=(l1.val+l2.val+carry)/10;
+                }
+                else if(l1==null){
+                    head.val=(l2.val+carry)%10;
+                    carry=(l2.val+carry)/10;
+                }
+                else{
+                    head.val=(l1.val+carry)%10;
+                    carry=(l1.val+carry)/10;
+                }
+                b=false;
+                trav=head;
+            }
+            else{
+                ListNode temp=new ListNode(0);
+                if(l1!=null && l2!=null){
+                    temp.val=(l1.val+l2.val+carry)%10;
+                    carry=(l1.val+l2.val+carry)/10;
+                }
+                else if(l1==null){
+                    temp.val=(l2.val+carry)%10;
+                    carry=(l2.val+carry)/10;
+                }
+                else{
+                    temp.val=(l1.val+carry)%10;
+                    carry=(l1.val+carry)/10;
+                }
+                trav.next=temp;
+                trav=trav.next;
+            }
+            if(l1!=null)
+                l1=l1.next;
+            if(l2!=null)
+            l2=l2.next;
+        }
+        if(carry>0){
+            ListNode temp=new ListNode(0);
+            temp.val=carry%10;
+            trav.next=temp;
+            trav=trav.next;
+        }
+        return head;
+    }
+}
