@@ -1,0 +1,28 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n=s.length();
+        String build="";
+        String max="";
+        if(n<=1){
+            return n;
+        }
+        for(int i=0;i<n;i++){
+            int interception=build.indexOf(s.charAt(i));
+            if(interception>=0){
+                if(build.length()>max.length()){
+                    max=build;
+                }
+                build=build.substring((interception+1))+s.charAt(i);
+            }
+            else{
+                build=build+s.charAt(i);
+            }
+        }
+        int ml=max.length();
+        int bl=build.length();
+        if(bl>ml)
+            return bl;
+        else
+            return ml;
+    }
+}
