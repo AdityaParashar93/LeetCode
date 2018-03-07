@@ -1,0 +1,56 @@
+class Solution {
+    public String intToRoman(int num) {
+        int div=1000,ans=0;
+        String roman="";
+        while(num>0){
+            ans=num/div;
+             for(int i=0;i<ans;i++){
+                if(num>=1000 && num<10000){
+                    roman=roman+"M";
+                }
+                else if(num>=100 && num<1000){
+                    if(ans==9){
+                        roman=roman+"CM";
+                        break;
+                    }
+                    else if(ans==5){
+                        roman=roman+"CD";
+                        break;
+                    }
+                    else
+                        roman=roman+"C";
+                }
+                else if(num>=10 && num<100){
+                    if(ans==4){
+                        roman=roman+"XL";
+                        break;
+                    }
+                    else if(ans==9){
+                        roman=roman+"XC";
+                        break;
+                    }
+                    else
+                        roman=roman+"X";
+                }
+                else{
+                    if(ans==4){
+                        roman=roman+"IV";
+                        break;
+                    }
+                    else if(ans==9){
+                        roman=roman+"IX";
+                        break;
+                    }
+                    else
+                        roman=roman+"I";
+                }
+            }
+            num=num%div;
+            div=div/10;
+        }
+        roman=roman.replace("IIIII","V");
+        roman=roman.replace("XXXXX","L");
+        roman=roman.replace("CCCCC","D");
+        return roman;
+    }
+}
